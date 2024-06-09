@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XactTodo.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XactTodo.Security", "XactTodo.Security\XactTodo.Security.csproj", "{9E588A10-4A42-4CC2-9A59-DAB03ECF84B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "..\WebApplication1\WebApplication1.csproj", "{B2F993B6-6303-4365-A800-5218BB21BCB3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XactTodo.Api", "XactTodo.Api\XactTodo.Api.csproj", "{A5A13DEC-0889-4D7F-A20B-C19578CB1974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XactTodo.Api", "XactTodo.Api\XactTodo.Api.csproj", "{A5A13DEC-0889-4D7F-A20B-C19578CB1974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{9E588A10-4A42-4CC2-9A59-DAB03ECF84B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E588A10-4A42-4CC2-9A59-DAB03ECF84B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E588A10-4A42-4CC2-9A59-DAB03ECF84B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2F993B6-6303-4365-A800-5218BB21BCB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2F993B6-6303-4365-A800-5218BB21BCB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2F993B6-6303-4365-A800-5218BB21BCB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2F993B6-6303-4365-A800-5218BB21BCB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5A13DEC-0889-4D7F-A20B-C19578CB1974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5A13DEC-0889-4D7F-A20B-C19578CB1974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5A13DEC-0889-4D7F-A20B-C19578CB1974}.Release|Any CPU.ActiveCfg = Release|Any CPU
