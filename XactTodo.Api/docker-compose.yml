@@ -14,3 +14,5 @@ services:
     volumes:
       - "/etc/localtime:/etc/localtime:ro" #解决时区不一致问题
       - "./logs:/app/Logs:rw"
+      # 可从容器中复制出来修改后取消下一行的注释 docker cp acttodoapi:/app/appsettings.Production.json ./appsettings.Production.json
+#      - "./appsettings.Production.json:/app/appsettings.Production.json"
