@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  xacttodoapi:
+    image: 10.1.8.40:1080/xzc/xacttodoapi
+    restart: always
+    container_name: xacttodoapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+      - 50666:50666
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro" #解决时区不一致问题
+      - "./logs:/app/Logs:rw"
