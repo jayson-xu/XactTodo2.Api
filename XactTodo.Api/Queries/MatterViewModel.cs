@@ -141,14 +141,19 @@ namespace XactTodo.Api.Queries
     }
 
     /// <summary>
-    /// 事项
+    /// 事项概要
     /// </summary>
     public class MatterOutline
     {
         /// <summary>
+        /// 主键
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// 主题
         /// </summary>
-        public string Subject { get; private set; }
+        public string? Subject { get; private set; }
 
         /// <summary>
         /// 重要性

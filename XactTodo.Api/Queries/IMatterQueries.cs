@@ -14,7 +14,7 @@ namespace XactTodo.Api.Queries
 
         Task<IEnumerable<UnfinishedMatterOutline>> GetUnfinishedMatterAsync(int userId);
 
-        //Task<IEnumerable<MatterSummary>> GetMattersAsync();
+        Task<IEnumerable<MatterOutline>> QueryMattersAsync(int userId, MatterQo qo);
 
         //Task<IEnumerable<CardType>> GetCardTypesAsync();
     }

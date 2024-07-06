@@ -54,6 +54,10 @@ namespace XactTodo.Api.Controllers
             return kvs;
         }
 
+        /// <summary>
+        /// 获取重要性枚举值
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("importances")]
         [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetImportances()
@@ -61,30 +65,39 @@ namespace XactTodo.Api.Controllers
             //var kvs = GetEnumKeyValues<Importance>();
             var kvs = new KeyValuePair<int, string>[]
             {
-                new KeyValuePair<int, string>((int)Importance.Uncertain, "不确定"),
-                new KeyValuePair<int, string>((int)Importance.Unimportant, "不重要"),
-                new KeyValuePair<int, string>((int)Importance.Normal, "一般"),
-                new KeyValuePair<int, string>((int)Importance.Important, "重要"),
-                new KeyValuePair<int, string>((int)Importance.VeryImportant, "非常重要"),
+                new((int)Importance.Uncertain, "不确定"),
+                new((int)Importance.Unimportant, "不重要"),
+                new((int)Importance.Normal, "一般"),
+                new((int)Importance.Important, "重要"),
+                new((int)Importance.VeryImportant, "非常重要"),
             };
             return Ok(kvs);
         }
 
+        /// <summary>
+        /// 获取时间单位枚举
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("timeunits")]
         [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int,string>>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetTimeUnits()
         {
             var kvs = new KeyValuePair<int, string>[]
             {
-                new KeyValuePair<int, string>((int)TimeUnit.Weekday, "工作日"),
-                new KeyValuePair<int, string>((int)TimeUnit.NaturalDay, "自然日"),
-                new KeyValuePair<int, string>((int)TimeUnit.Week, "周"),
-                new KeyValuePair<int, string>((int)TimeUnit.Month, "月"),
-                new KeyValuePair<int, string>((int)TimeUnit.Year, "年"),
+                new((int)TimeUnit.Weekday, "工作日"),
+                new((int)TimeUnit.NaturalDay, "自然日"),
+                new((int)TimeUnit.Week, "周"),
+                new((int)TimeUnit.Month, "月"),
+                new((int)TimeUnit.Year, "年"),
             };
             return Ok(kvs);
         }
 
+        /// <summary>
+        /// 获取与当前用户相关的未完成事项
+        /// </summary>
+        /// <param name="excludedTeamsId">排除指定的组</param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("unfinished")]
         [ProducesResponseType(typeof(IEnumerable<UnfinishedMatterOutline>), (int)HttpStatusCode.OK)]
@@ -95,6 +108,26 @@ namespace XactTodo.Api.Controllers
             return Ok(unfinishedMatters);
         }
 
+        /// <summary>
+        /// 查询与当前用户相关的事项
+        /// </summary>
+        /// <param name="qo"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost("query")]
+        [ProducesResponseType(typeof(IEnumerable<MatterOutline>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> QueryMatters(MatterQo qo)
+        {
+            session.VerifyLoggedin();
+            var unfinishedMatters = await matterQueries.QueryMattersAsync(session.UserId.Value, qo);
+            return Ok(unfinishedMatters);
+        }
+
+        /// <summary>
+        /// 获取指定事项
+        /// </summary>
+        /// <param name="id">事项Id</param>
+        /// <returns></returns>
         [Authorize]
         [Route("{id:int}")] //加上类型声明的好处是，如果传入的参数不是整数则直接返回404，不加则返回400并报告错误"The value 'xxx' is not valid."
         [HttpGet]
@@ -245,6 +278,12 @@ namespace XactTodo.Api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 将指定事项置为已完成状态
+        /// </summary>
+        /// <param name="id">事项Id</param>
+        /// <param name="ask">完成时间及备注等</param>
+        /// <returns></returns>
         [HttpPost("{id:int}/[action]")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -253,6 +292,12 @@ namespace XactTodo.Api.Controllers
             return await Finish(id, ask.FinishTime, ask.Comment);
         }
 
+        /// <summary>
+        /// 将指定事项置为未完成状态
+        /// </summary>
+        /// <param name="id">事项Id</param>
+        /// <param name="comment">备注</param>
+        /// <returns></returns>
         [Route("{id:int}/[action]")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
